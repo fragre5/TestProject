@@ -5,10 +5,8 @@ echo "Verifying the validity of the branch name"
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
 REGEX="(bugfix|feature|hotfix|develop)\/[A-Z]+-[0-9]+\/[a-zA-Z0-9_-]+$"
 
-if [[ $BRANCH != "master" ]]; then
- if ! [[ $BRANCH =~ $REGEX ]]; then
-    echo "Your commit was rejected due to invalid branch name"
-    echo "Please rename your branch following this template '(bugfix|feature|hotfix|develop)/task-id/a-Z0-9_-'"
-    exit 1
- fi
+if ! [[ $BRANCH =~ $REGEX ]]; then
+  echo "Your commit was rejected due to invalid branch name"
+  echo "Please rename your branch following this template '(bugfix|feature|hotfix|develop)/task-id/a-Z0-9_-'"
+  exit 1
 fi

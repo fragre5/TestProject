@@ -14,6 +14,16 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
+tasks.register('validatingBranchName', Copy) {
+    from 'script/checkBranchName'
+    into '.git/hooks'
+    rename { 'pre-commit' }
+}
+
+tasks.named('build') {
+    dependsOn validatingBranchName
+}
+
 test {
     useJUnitPlatform()
 }
